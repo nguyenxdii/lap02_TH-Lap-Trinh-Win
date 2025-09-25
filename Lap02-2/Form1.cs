@@ -21,15 +21,15 @@ namespace Lap02_2
         {
 
             // 2.1
-            cmbFaculty.SelectedIndex = 0;
+            cmbFaculty.SelectedIndex = 0; // da chinh thanh dropdownlist trong properties
             optFemale.Checked = true;
 
 #if DEBUG
-            LoadSampleData();
+            LoadSampleData();   //load data khi debug
 #endif
 
-            dgvStudent.CellClick += dgvStudent_CellClick; // event clickcell
-            UpdateGenderCount(); // so luong nam nu ban dau
+            dgvStudent.CellClick += dgvStudent_CellClick; // gan event click vao bang thong tin
+            UpdateGenderCount(); // tinh so luong nam nu (ban dau la 0)
         }
 
         private void LoadSampleData()
@@ -40,14 +40,20 @@ namespace Lap02_2
             dgvStudent.Rows.Add("13", "Lê Văn C", "Nam", 6.2, "NNA");
         }
 
+        // kiem tra mssv da co trong bang hay chua
         private int GetSelectedRow(string studentID)
         {
             for (int i = 0; i < dgvStudent.Rows.Count; i++)
             {
                 if (dgvStudent.Rows[i].Cells[0].Value != null &&
                 !string.IsNullOrEmpty(dgvStudent.Rows[i].Cells[0].Value.ToString()))
+                // dong thu i (cot thu 0, cells[0] tuc la mssv) k rong
+                // && chuoi k rong -> co du lieu,
+                // IsNullOrEmpty tra ve true neu null hoac rong ""
+                // tra ve false neu co ky tu
+                // !IsNullOrEmpty tra ve true neu co ky tu
                 {
-                    if (dgvStudent.Rows[i].Cells[0].Value.ToString() == studentID)
+                    if (dgvStudent.Rows[i].Cells[0].Value.ToString() == studentID)  // dong i cot mssv co giong studentID k, co return i, k return -1
                     {
                         return i;
                     }
@@ -72,24 +78,24 @@ namespace Lap02_2
                 if (txtStudentID.Text == "" || txtFullName.Text == "" || txtAverageScore.Text == "")
                     throw new Exception("Vui lòng nhập đầy đủ thông tin sinh viên!");
 
-                int selectedRow = GetSelectedRow(txtStudentID.Text);
-                if (selectedRow == -1)
+                int selectedRow = GetSelectedRow(txtStudentID.Text); // kiem tra co sv trong bang chua
+                if (selectedRow == -1)  // k tim thay sv
                 {
-                    selectedRow = dgvStudent.Rows.Add();
-                    InsertUpdate(selectedRow);
-                    UpdateGenderCount();
+                    selectedRow = dgvStudent.Rows.Add();    // them 1 dong ms
+                    InsertUpdate(selectedRow);              // chen du lieu tu nho nhap qua bang
+                    UpdateGenderCount();                    // cap nhat lai so luong nam nu
                     MessageBox.Show("Thêm mới dữ liệu thành công!", "Thông Báo", MessageBoxButtons.OK);
                 }
-                else
+                else // da co sv trong bang
                 {
-                    InsertUpdate(selectedRow);
-                    UpdateGenderCount();
+                    InsertUpdate(selectedRow);  // cap nhat lai du lieu dong do
+                    UpdateGenderCount();        // cap nhat lai so luong nam nu
                     MessageBox.Show("Cập nhật dữ liệu thành công!", "Thông Báo", MessageBoxButtons.OK);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Lỗi: " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -97,41 +103,48 @@ namespace Lap02_2
         {
             try
             {
-                int selectedRow = GetSelectedRow(txtStudentID.Text);
-                if (selectedRow == -1)
+                int selectedRow = GetSelectedRow(txtStudentID.Text);    // goi ham kiem tra mssv
+                if (selectedRow == -1)  // k co nem ra ex k tim thay mssv
                 {
                     throw new Exception("Không tìm thấy MSSV cần xóa!");
                 }
-                else
+                else // tim thay
                 {
                     DialogResult dr = MessageBox.Show("Bạn có muốn xóa ?", "YES/NO", MessageBoxButtons.YesNo);
                     if (dr == DialogResult.Yes)
                     {
                         dgvStudent.Rows.RemoveAt(selectedRow);
-                        UpdateGenderCount();
+                        UpdateGenderCount(); // cap nhat lai so luong nam nu
                         MessageBox.Show("Xóa sinh viên thành công!", "Thông Báo", MessageBoxButtons.OK);
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi: " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         // 2.4 tra lai ket qua ve thong tin sv
         private void dgvStudent_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) // dam bao rang se k chon header
+            if (e.RowIndex >= 0) // dam bao nhap vao du lieu k phai tieu de 
             {
-                DataGridViewRow row = dgvStudent.Rows[e.RowIndex];
+                DataGridViewRow row = dgvStudent.Rows[e.RowIndex];  // lay dong dc click
                 txtStudentID.Text = row.Cells[0].Value?.ToString();
                 txtFullName.Text = row.Cells[1].Value?.ToString();
+
                 string gender = row.Cells[2].Value?.ToString();
+
                 if (gender == "Nam")
+                {
                     optMale.Checked = true;
+                }
                 else
+                {
                     optFemale.Checked = true;
+                }
+
                 txtAverageScore.Text = row.Cells[3].Value?.ToString();
                 cmbFaculty.Text = row.Cells[4].Value?.ToString();
             }
@@ -141,11 +154,11 @@ namespace Lap02_2
         private void UpdateGenderCount()
         {
             int male = 0, female = 0; // khoi tao ban dau nam nu = 0
-            foreach (DataGridViewRow row in dgvStudent.Rows)
+            foreach (DataGridViewRow row in dgvStudent.Rows)    // duyet tung dong trong dgv
             {
-                if (row.Cells[2].Value != null)
+                if (row.Cells[2].Value != null)     // kiem tra xem cot gioi tinh co du lieu hay k, null == bo qua
                 {
-                    string gender = row.Cells[2].Value.ToString();
+                    string gender = row.Cells[2].Value.ToString();      // chuyen du lieu trong cot gioi tinh thanh chuoi
                     if (gender == "Nam")
                     {
                         male++;
@@ -160,7 +173,5 @@ namespace Lap02_2
             txtTotalMale.Text = male.ToString();
             txtTotalFemale.Text = female.ToString();
         }
-
-
     }
 }

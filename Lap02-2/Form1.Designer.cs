@@ -38,11 +38,6 @@
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.dgvStudent = new System.Windows.Forms.DataGridView();
-            this.StudentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Sex = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AverageScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Faculty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtStudentID = new System.Windows.Forms.TextBox();
             this.txtFullName = new System.Windows.Forms.TextBox();
             this.optMale = new System.Windows.Forms.RadioButton();
@@ -54,6 +49,11 @@
             this.txtTotalMale = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtTotalFemale = new System.Windows.Forms.TextBox();
+            this.StudentID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AverageScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Faculty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudent)).BeginInit();
             this.SuspendLayout();
@@ -160,7 +160,7 @@
             this.dgvStudent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.StudentID,
             this.FullName,
-            this.Sex,
+            this.Gender,
             this.AverageScore,
             this.Faculty});
             this.dgvStudent.Location = new System.Drawing.Point(463, 83);
@@ -171,41 +171,6 @@
             this.dgvStudent.Size = new System.Drawing.Size(813, 245);
             this.dgvStudent.TabIndex = 2;
             this.dgvStudent.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStudent_CellClick);
-            // 
-            // StudentID
-            // 
-            this.StudentID.HeaderText = "MSSV";
-            this.StudentID.MinimumWidth = 8;
-            this.StudentID.Name = "StudentID";
-            this.StudentID.Width = 150;
-            // 
-            // FullName
-            // 
-            this.FullName.HeaderText = "Họ và tên";
-            this.FullName.MinimumWidth = 8;
-            this.FullName.Name = "FullName";
-            this.FullName.Width = 150;
-            // 
-            // Sex
-            // 
-            this.Sex.HeaderText = "Giới tính";
-            this.Sex.MinimumWidth = 8;
-            this.Sex.Name = "Sex";
-            this.Sex.Width = 150;
-            // 
-            // AverageScore
-            // 
-            this.AverageScore.HeaderText = "Điểm TB";
-            this.AverageScore.MinimumWidth = 8;
-            this.AverageScore.Name = "AverageScore";
-            this.AverageScore.Width = 150;
-            // 
-            // Faculty
-            // 
-            this.Faculty.HeaderText = "Khoa";
-            this.Faculty.MinimumWidth = 8;
-            this.Faculty.Name = "Faculty";
-            this.Faculty.Width = 150;
             // 
             // txtStudentID
             // 
@@ -252,6 +217,7 @@
             // 
             // cmbFaculty
             // 
+            this.cmbFaculty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFaculty.FormattingEnabled = true;
             this.cmbFaculty.Items.AddRange(new object[] {
             "QTKD",
@@ -303,6 +269,41 @@
             this.txtTotalFemale.Size = new System.Drawing.Size(55, 26);
             this.txtTotalFemale.TabIndex = 1;
             // 
+            // StudentID
+            // 
+            this.StudentID.HeaderText = "MSSV";
+            this.StudentID.MinimumWidth = 8;
+            this.StudentID.Name = "StudentID";
+            this.StudentID.Width = 150;
+            // 
+            // FullName
+            // 
+            this.FullName.HeaderText = "Họ và tên";
+            this.FullName.MinimumWidth = 8;
+            this.FullName.Name = "FullName";
+            this.FullName.Width = 150;
+            // 
+            // Gender
+            // 
+            this.Gender.HeaderText = "Giới tính";
+            this.Gender.MinimumWidth = 8;
+            this.Gender.Name = "Gender";
+            this.Gender.Width = 150;
+            // 
+            // AverageScore
+            // 
+            this.AverageScore.HeaderText = "Điểm TB";
+            this.AverageScore.MinimumWidth = 8;
+            this.AverageScore.Name = "AverageScore";
+            this.AverageScore.Width = 150;
+            // 
+            // Faculty
+            // 
+            this.Faculty.HeaderText = "Khoa";
+            this.Faculty.MinimumWidth = 8;
+            this.Faculty.Name = "Faculty";
+            this.Faculty.Width = 150;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -345,11 +346,6 @@
         private System.Windows.Forms.Button btnUpdate;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridView dgvStudent;
-        private System.Windows.Forms.DataGridViewTextBoxColumn StudentID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FullName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Sex;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AverageScore;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Faculty;
         private System.Windows.Forms.ComboBox cmbFaculty;
         private System.Windows.Forms.TextBox txtAverageScore;
         private System.Windows.Forms.Label label7;
@@ -357,6 +353,11 @@
         private System.Windows.Forms.TextBox txtTotalMale;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtTotalFemale;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StudentID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FullName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Gender;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AverageScore;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Faculty;
     }
 }
 
